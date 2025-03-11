@@ -138,13 +138,7 @@ const Home = ({navigation}) => {
                                             <Text>Loading...</Text>
                                         )}
                                 </View>
-                            
                             </View>
-                                
-                                
-                                
-                        
-                        
                         </View>
                     </View>
                 </View>

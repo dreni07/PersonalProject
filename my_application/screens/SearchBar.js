@@ -1,8 +1,9 @@
 import {useState,useEffect} from 'react';
 import {View,Text,StyleSheet,TextInput} from 'react-native';
 import SearchResults from './SearchResults';
+import {SaveSearchedResults} from './SaveSearchedData';
 
-const SearchBar = ({search_results,setSearchResults}) => {
+const SearchBar = ({handleDetails,search_results,setSearchResults}) => {
     const [isSearching,setSearching] = useState(false);
     const [search_details,setSearchDetails] = useState({});
 
@@ -13,7 +14,7 @@ const SearchBar = ({search_results,setSearchResults}) => {
             const options = {
                 method:"POST",
                 headers:{
-                    'x-rapidapi-key':'c82273b10amshb8cfde8b59d7cp18f77ajsn3acb841cc86b',
+                    'x-rapidapi-key':'c82273b10amshb8cfde8b8d59d7cp18f77ajsn3acb841cc86b',
                     'x-rapidapi-host':'translate-plus.p.rapidapi.com',
                     'Content-Type':'application/json'
                 },
@@ -29,7 +30,9 @@ const SearchBar = ({search_results,setSearchResults}) => {
                     throw new Error('Something went wrong');
                 }
                 const answer = await response.json();
-    
+
+                
+                SaveSearchedResults(text.nativeEvent.text);
                 setSearchDetails(answer.details);
                 setSearchResults({searched:text.nativeEvent.text,translation:answer.translations.translation})
             } catch(err) {
@@ -42,8 +45,8 @@ const SearchBar = ({search_results,setSearchResults}) => {
     }
     return(
         <View style={styles.search_container}>
-            <TextInput onChange={(text) => {handleSearchResults(text)}} style={styles.search_input}/>
-            <SearchResults/>
+            <TextInput onChange={(text) => {handleSearchResults(text)}} style={styles.search_input} placeholder="Search For A Word..."/>
+            <SearchResults search_details={search_details} isSearching={isSearching} handleDetails={handleDetails} search_results={search_results}/>
         </View>
     )
 }

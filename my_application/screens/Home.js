@@ -7,6 +7,7 @@ import { SaveCourse } from './SaveCourse';
 import Level from './Level';
 import SearchBar from './SearchBar';
 import { UserCourse } from './GetUserCourse';
+import { Practical } from './Practical';
 
 
 export const Context = createContext();
@@ -24,13 +25,17 @@ const Home = ({navigation}) => {
     const first_mount = useRef(false);
     const [search_results,setSearchResults] = useState({});
 
+    Practical().then(ans=>{
+        console.log(ans,"PRACTICAL BABY");
+    })
+
     UserCourse().then(ans=>{
         console.log('User course there buddy',ans);
     })
    
     const handleDetails = (search_details) => {
         if(search_details){
-            if(search_details.definations.length > 0){
+            if(search_details.definations?.length > 0){
                 navigation.navigate("SearchDetails",{search_details:search_details})
             }else{
                 alert("No Details About This Word!");

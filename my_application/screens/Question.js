@@ -26,7 +26,6 @@ const Question = ({route,navigation}) => {
     })
     let { question,the_level } = route.params;
 
-    console.log(question,"QUESTION IN THEREEE");
 
     const the_question_number = parseInt(question[0].split('').at(-1));
 
@@ -35,7 +34,6 @@ const Question = ({route,navigation}) => {
         return the_correct_answer;
     },[]);
 
-    
 
     const handlePress = (answer) => {
         if(answer === the_correct_answer){
@@ -45,15 +43,12 @@ const Question = ({route,navigation}) => {
                         main_navigation.navigate("Home");
                     }
                 });
-
-                // main_navigation.navigate("Home");
                 
             }
             navigation.navigate(`Question${the_question_number + 1}`);
         }else{
             const the_current_question = `How To Say ${question[1].word_in_english[0]} In ${userLanguage ? first_letter_capitalized(userLanguage) : ''}`;
 
-            console.log(the_current_question,"THE CURRENT QUESTION FOR WRONG ONE");
             let the_question_wrong = {
                 question:the_current_question,
                 options:question[1].options,

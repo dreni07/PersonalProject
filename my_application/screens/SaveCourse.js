@@ -10,7 +10,7 @@ export const SaveCourse =  async (level_updated=false) => {
         if(get_course){
             if(level_updated){ // in case the user upgrades his level this will be the functionality
                 const the_current_course = JSON.parse(get_course);
-                the_current_course.current_level = level_updated;
+                the_current_course.current_level =  level_updated > the_current_course.current_level ? level_updated : the_current_course.current_level;
                 await AsyncStorage.removeItem('user_course');
                 await AsyncStorage.setItem('user_course',JSON.stringify(the_current_course));
             }

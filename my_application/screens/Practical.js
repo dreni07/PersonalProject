@@ -3,7 +3,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
  
 export const Practical = async () => { 
     const the_questions_wrong = await AsyncStorage.getItem('questions_wrong');
-    if(!the_questions_wrong) return;
+    if(!the_questions_wrong) return; // wrong questions not here
     return JSON.parse(the_questions_wrong);
 };
 

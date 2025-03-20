@@ -1,5 +1,5 @@
 import React,{useState,useEffect,useRef,createContext} from 'react';
-import {View,Text,StyleSheet,Dimensions} from 'react-native';
+import {View,Text,StyleSheet,Dimensions,TouchableOpacity} from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { CheckForAccount } from './Check';
 import Quiz from './data/quiz.json';
@@ -8,6 +8,8 @@ import Level from './Level';
 import SearchBar from './SearchBar';
 import { UserCourse } from './GetUserCourse';
 import { Practical } from './Practical';
+import { GetQuestionsWrong } from './AddQuestionWrong';
+
 
 
 export const Context = createContext();
@@ -24,14 +26,21 @@ const Home = ({navigation}) => {
     const [levels,setLevels] = useState([]);
     const first_mount = useRef(false);
     const [search_results,setSearchResults] = useState({});
+    const [is_questions_wrong,setQuestionsWrong] = useState(false);
 
-    Practical().then(ans=>{
-        console.log(ans,"PRACTICAL BABY");
-    })
 
-    UserCourse().then(ans=>{
-        console.log('User course there buddy',ans);
-    })
+
+    useEffect(()=>{
+        GetQuestionsWrong().then(ans=>{
+            if(ans){
+                console.log(ans,"Questions Wrong There");
+                setQuestionsWrong(true);
+            }
+        })
+    },[]);
+   
+
+    
    
     const handleDetails = (search_details) => {
         if(search_details){
@@ -122,7 +131,15 @@ const Home = ({navigation}) => {
     return(
         <Context.Provider value={{ value:[currentLevel,setCurrentLevel] }}>
                 <View>
-                    <SearchBar handleDetails={handleDetails} search_results={search_results} setSearchResults={setSearchResults}/>
+                    <View style={styles.wrapper_side}>
+                        <TouchableOpacity onPress={() => {navigation.navigate('Articles')}} style={styles.button_recommended}>
+                            <Text style={styles.text_recommended}>Exercise Your Language</Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity style={ is_questions_wrong ? styles.button_recommended : styles.not_displayed} onPress={()=>{navigation.navigate("Practical")}}>
+                            <Text style={styles.text_recommended}>Recommended</Text>
+                        </TouchableOpacity>
+                        <SearchBar  handleDetails={handleDetails} search_results={search_results} setSearchResults={setSearchResults}/>
+                    </View>
                     <Text style={styles.title}>Enjoy Your Learning {username}!</Text>
                     <View style={styles.course}>
                         <Text style={{ color:'#333',fontFamily:'sans-serif',fontWeight:'500',fontSize:'20px' }}>Your Course:</Text>
@@ -198,6 +215,33 @@ const styles = StyleSheet.create({
         flexDirection:'row',
         justifyContent:'space-evenly',
         flexWrap:'wrap',
+    },
+    wrapper_side:{
+        width:'600px',
+        position:'absolute',
+        right:10,
+        display:'flex',
+        flexDirection:'row',
+    },
+    button_recommended:{
+        paddingVertical:10,
+        marginVertical:2,
+        marginRight:10,
+        backgroundColor:'#003366',
+        display:'flex',
+        alignItems:'center',
+        justifyContent:'center',
+        zIndex:1,
+    },
+    text_recommended:{
+        color:'#333',
+        fontFamily:'sans-serif',
+        fontWeight:'500',
+        paddingHorizontal:10,
+        color:'white'
+    },
+    not_displayed:{
+        display:'none'
     }
 })
 

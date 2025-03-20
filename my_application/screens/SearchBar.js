@@ -1,7 +1,7 @@
 import {useState,useEffect} from 'react';
 import {View,Text,StyleSheet,TextInput} from 'react-native';
 import SearchResults from './SearchResults';
-import {SaveSearchedResults} from './SaveSearchedData';
+// import {SaveSearchedResults} from './SaveUserData';
 
 const SearchBar = ({handleDetails,search_results,setSearchResults}) => {
     const [isSearching,setSearching] = useState(false);
@@ -12,18 +12,18 @@ const SearchBar = ({handleDetails,search_results,setSearchResults}) => {
             setSearching(true);
             const url = 'https://translate-plus.p.rapidapi.com/translate';
             const options = {
-                method:"POST",
-                headers:{
-                    'x-rapidapi-key':'c82273b10amshb8cfde8b8d59d7cp18f77ajsn3acb841cc86b',
-                    'x-rapidapi-host':'translate-plus.p.rapidapi.com',
-                    'Content-Type':'application/json'
+                method: 'POST',
+                headers: {
+                    'x-rapidapi-key': 'e2b949a7cemsh503ba2581247ed5p1e6919jsnd40034f5a671',
+                    'x-rapidapi-host': 'translate-plus.p.rapidapi.com',
+                    'Content-Type': 'application/json'
                 },
-                body:JSON.stringify({
+                body: JSON.stringify({
                     text:text.nativeEvent.text,
-                    source:'en',
-                    target:'fr'
+                    source: 'en',
+                    target: 'fr'
                 })
-            }
+            };
             try{
                 const response = await fetch(url,options);
                 if(!response.ok) {
@@ -32,7 +32,7 @@ const SearchBar = ({handleDetails,search_results,setSearchResults}) => {
                 const answer = await response.json();
 
                 
-                SaveSearchedResults(text.nativeEvent.text);
+                // SaveSearchedResults(text.nativeEvent.text);
                 setSearchDetails(answer.details);
                 setSearchResults({searched:text.nativeEvent.text,translation:answer.translations.translation})
             } catch(err) {

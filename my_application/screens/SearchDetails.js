@@ -56,12 +56,12 @@ const SearchDetails = ({route}) => {
         const options = {
             method: 'POST',
             headers: {
-                'x-rapidapi-key': 'c82273b10amshb8cfde8b8d59d7cp18f77ajsn3acb841cc86b',
+                'x-rapidapi-key': 'e2b949a7cemsh503ba2581247ed5p1e6919jsnd40034f5a671',
                 'x-rapidapi-host': 'translate-plus.p.rapidapi.com',
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-                text,
+                text:text.nativeEvent.text,
                 source: 'en',
                 target: 'fr'
             })

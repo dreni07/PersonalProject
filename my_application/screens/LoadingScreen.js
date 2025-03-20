@@ -1,10 +1,14 @@
-import React from 'react'
+import React,{useEffect,useContext,useRef} from 'react'
+import { Text } from 'react-native-gesture-handler'
+import { PersonalizedQuizContext } from './PracticalQuestion';
 
-const LoadingScreen = () => {
+
+const LoadingScreen = ({navigation}) => {
+  useEffect(()=>{
+    navigation.navigate('Question_1');
+  },[]);
   return (
-    <div>
-      
-    </div>
+      <Text>Loading</Text>
   )
 }
 

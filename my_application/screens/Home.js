@@ -21,7 +21,6 @@ const Home = ({navigation}) => {
     const the_course = SaveCourse(false);
     const [username,setUsername] = useState('');
     const [language,setLanguage] = useState('');
-    const [userCourse,setCourse] = useState(null);
     const [currentLevel,setCurrentLevel] = useState(0);
     const [levels,setLevels] = useState([]);
     const first_mount = useRef(false);
@@ -32,8 +31,7 @@ const Home = ({navigation}) => {
 
     useEffect(()=>{
         GetQuestionsWrong().then(ans=>{
-            if(ans){
-                console.log(ans,"Questions Wrong There");
+            if(ans.length > 5){
                 setQuestionsWrong(true);
             }
         })
@@ -69,56 +67,12 @@ const Home = ({navigation}) => {
             }
         })
 
-
     },[]);
 
-    // useEffect(()=>{
-    //         Practical().then((ans)=>{
-    //             console.log(ans,"THE ANSWER OF PRACTICAL");
-    //         })
-    // },[]);
     
-  
-    // Features to add --> the practical quiz in which the user
-    // will be taking another quiz which is a special quiz
-    // Search for any word in french and see the results
-    // online like a translator
-    // Progress tracking (in which maybe I will count how many)
-    // words has the user learned
-
-    const translate = async (text) => {
-        const url = 'https://translate-plus.p.rapidapi.com/translate';
-        const options = {
-            method: 'POST',
-            headers: {
-                'x-rapidapi-key': 'e91fed1247msh40f39dca1776a54p144a99jsn64bd354cb6de',
-                'x-rapidapi-host': 'translate-plus.p.rapidapi.com',
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                text: 'Hello , How are you',
-                source: 'en',
-                target: 'fr'
-            })
-        };
-        
-        try {
-            const response = await fetch(url, options);
-            const result = await response.json();
-            console.log(result);
-        } catch (error) {
-            console.error(error);
-        }        
-    };
-      
-      
-   
-    
-
     useEffect(()=>{
         if(first_mount.current){
             the_course.then(ans=>{
-                console.log(ans,"THE ANSWER");
                 setLevels(Object.entries(ans.the_course));
                 setCurrentLevel(ans.current_level);
             })
@@ -128,8 +82,18 @@ const Home = ({navigation}) => {
         
     },[language]);
 
+    const handleDeleteAccount = async () => {
+        try{
+            await AsyncStorage.clear();
+
+            navigation.navigate("Presantation");
+        } catch(err) {
+            console.error(err);
+        }
+    }
+
     return(
-        <Context.Provider value={{ value:[currentLevel,setCurrentLevel] }}>
+        <Context.Provider value={{ value:[currentLevel,setCurrentLevel],language:[language,setLanguage] }}>
                 <View>
                     <View style={styles.wrapper_side}>
                         <TouchableOpacity onPress={() => {navigation.navigate('Articles')}} style={styles.button_recommended}>
@@ -137,6 +101,9 @@ const Home = ({navigation}) => {
                         </TouchableOpacity>
                         <TouchableOpacity style={ is_questions_wrong ? styles.button_recommended : styles.not_displayed} onPress={()=>{navigation.navigate("Practical")}}>
                             <Text style={styles.text_recommended}>Recommended</Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity style={styles.deleteButton} onPress={handleDeleteAccount}>
+                            <Text style={styles.text_recommended}>Delete Account</Text>
                         </TouchableOpacity>
                         <SearchBar  handleDetails={handleDetails} search_results={search_results} setSearchResults={setSearchResults}/>
                     </View>
@@ -153,7 +120,6 @@ const Home = ({navigation}) => {
                                                         <Level level={level}/>
                                                     </View>
 
-                                                    // <Text key={index}>Level {index + 1}</Text>
                                                 )
                                             })
                                         ) : (
@@ -217,7 +183,7 @@ const styles = StyleSheet.create({
         flexWrap:'wrap',
     },
     wrapper_side:{
-        width:'600px',
+        width:'800px',
         position:'absolute',
         right:10,
         display:'flex',
@@ -232,6 +198,17 @@ const styles = StyleSheet.create({
         alignItems:'center',
         justifyContent:'center',
         zIndex:1,
+    },
+    deleteButton:{
+        paddingVertical:10,
+        marginVertical:2,
+        marginRight:10,
+        backgroundColor:'#FF5733',
+        display:'flex',
+        alignItems:'center',
+        justifyContent:'center',
+        zIndex:1,
+        borderRadius:2
     },
     text_recommended:{
         color:'#333',

@@ -1,11 +1,29 @@
 import {useState,useEffect} from 'react';
 import {View,Text,StyleSheet,TextInput} from 'react-native';
 import SearchResults from './SearchResults';
+import { CheckForAccount } from './Check';
 // import {SaveSearchedResults} from './SaveUserData';
 
 const SearchBar = ({handleDetails,search_results,setSearchResults}) => {
     const [isSearching,setSearching] = useState(false);
     const [search_details,setSearchDetails] = useState({});
+    const [search_language,setSearchingLanguage] = useState("");
+
+    const get_the_language = async () => {
+        try {
+            const account = await CheckForAccount();
+            return account ? account : {};
+        } catch(err) {
+            console.error(err);
+        }
+    }
+
+    useEffect(()=>{
+        get_the_language().then(ans=>{
+            setSearchingLanguage(JSON.parse(ans).language);
+        })
+    },[]);
+
 
     const handleSearchResults = async (text) => {
         if(text.nativeEvent.text.length > 0) {
@@ -14,14 +32,14 @@ const SearchBar = ({handleDetails,search_results,setSearchResults}) => {
             const options = {
                 method: 'POST',
                 headers: {
-                    'x-rapidapi-key': 'e2b949a7cemsh503ba2581247ed5p1e6919jsnd40034f5a671',
-                    'x-rapidapi-host': 'translate-plus.p.rapidapi.com',
-                    'Content-Type': 'application/json'
+                        'x-rapidapi-key': 'e2b949a7cemsh503ba2581247ed5p1e6919jsnd40034f5a671',
+                        'x-rapidapi-host': 'translate-plus.p.rapidapi.com',
+                        'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({
                     text:text.nativeEvent.text,
                     source: 'en',
-                    target: 'fr'
+                    target: search_language
                 })
             };
             try{
@@ -30,9 +48,8 @@ const SearchBar = ({handleDetails,search_results,setSearchResults}) => {
                     throw new Error('Something went wrong');
                 }
                 const answer = await response.json();
-
-                
-                // SaveSearchedResults(text.nativeEvent.text);
+    
+                    
                 setSearchDetails(answer.details);
                 setSearchResults({searched:text.nativeEvent.text,translation:answer.translations.translation})
             } catch(err) {
@@ -41,8 +58,14 @@ const SearchBar = ({handleDetails,search_results,setSearchResults}) => {
         }else{
             setSearching(false);
         }
-      
+          
     }
+
+        
+
+
+   
+    
     return(
         <View style={styles.search_container}>
             <TextInput onChange={(text) => {handleSearchResults(text)}} style={styles.search_input} placeholder="Search For A Word..."/>

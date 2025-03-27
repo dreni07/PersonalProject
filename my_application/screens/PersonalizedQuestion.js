@@ -2,6 +2,8 @@ import {useState,useEffect,useRef} from 'react';
 import {View,Text,StyleSheet,TouchableOpacity,TextInput} from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { AddCorrectQuestion,getCorrectQuestions,RemoveCorrectQuestion } from './AddCorrectQuestion';
+import { CheckForAccount } from './Check';
+
 const PersonalizedQuestion = ({route,navigation}) => {
     let {question,current_question} = route.params;
     const [correct_answer,setCorrectAnswer] = useState("");
@@ -11,11 +13,23 @@ const PersonalizedQuestion = ({route,navigation}) => {
     const [number_of_correct_questions,setCorrectQuestion] = useState(0);
     const [end_of_quiz,setQuizEnd] = useState(false);
 
+
     const the_first_mount = useRef(null);
+
+    const navigation_instance = useNavigation();
 
     // mduhet me kodu UI per PersonalizedQuestion
 
-    const get_the_result = async (the_question) => {
+    const get_the_language = async () => {
+        try {
+           const account = await CheckForAccount();
+           return account ? account : {};
+        } catch(err) {
+            console.error(err);
+        }
+    }
+
+    const get_the_result = async (the_question,the_language_to_translate) => {
         try{
             const url = 'https://translate-plus.p.rapidapi.com/translate';
             const options = {
@@ -28,7 +42,7 @@ const PersonalizedQuestion = ({route,navigation}) => {
                 body: JSON.stringify({
                     text:the_question,
                     source: 'en',
-                    target: 'fr'
+                    target: the_language_to_translate
                 })
             };
 
@@ -36,13 +50,15 @@ const PersonalizedQuestion = ({route,navigation}) => {
 
             console.log(response)
 
+            console.log("Language To Translate",the_language_to_translate);
+
             if(!response.ok) {
                 throw new Error("Something Went Wrong");
             }
 
             const answer = await response.json();
 
-            
+            console.log(answer,"ANSWER FROM API ");
             setCorrectAnswer(answer.translations.translation);
         } catch(err) {
             console.error(err);
@@ -51,7 +67,9 @@ const PersonalizedQuestion = ({route,navigation}) => {
 
     useEffect(()=>{
         if(!the_first_mount.current) {
-            get_the_result(question.split(' ')[3]);
+            get_the_language().then(ans=>{
+                get_the_result(question.split(' ')[3],JSON.parse(ans).language);
+            });
         }else{
             the_first_mount.current = true;
         }
@@ -63,23 +81,17 @@ const PersonalizedQuestion = ({route,navigation}) => {
             
             let the_correct_questions = getCorrectQuestions();
             the_correct_questions.then(ans=>{
-                console.log(ans,"THE NUMBER OF CORRECT QUESTIONS");
                 setCorrectQuestion(parseInt(ans));
             });
 
             RemoveCorrectQuestion();
 
             setTimeout(()=>{
-                useNavigation("Home");
+                navigation_instance("Home");
             },3000);
         }
-        // }else{
-        //     navigation.navigate(`Question_${current_question + 1}`);
-        // }
-
+        
         if(user_answer.toLowerCase() == correct_answer.toLowerCase()) {
-            // setCorrectQuestion(number_of_correct_questions + 1);
-            // setTries(0);
             AddCorrectQuestion();
             navigation.navigate(`Question_${current_question + 1}`);
         }else{
@@ -122,7 +134,6 @@ const PersonalizedQuestion = ({route,navigation}) => {
                 <Text style={styles.correct_question}>Correct: {number_of_correct_questions}/5</Text>
             </View>
            
-            {/* <Text>Correct Answer {correct_answer}</Text> */}
         </View>
     )
 }

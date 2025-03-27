@@ -1,6 +1,6 @@
 {
     "languages":{
-        "french":{
+        "fr":{
             "level1":{
                 "difficulty":"Begginner",
                 "question1":{
@@ -265,6 +265,540 @@
                     "c": "Difficulté",
                     "d": "Obstacle",
                     "correct": "Défi"
+                }
+            }
+        }
+    },
+    "de": {
+        "level1": {
+            "difficulty": "Beginner",
+            "question1": {
+                "word_in_english": ["Hello"],
+                "options": {
+                    "a": "Hallo",
+                    "b": "Guten Morgen",
+                    "c": "Tschüss",
+                    "d": "Danke",
+                    "correct": "Hallo"
+                }
+            },
+            "question2": {
+                "word_in_english": ["Goodbye"],
+                "options": {
+                    "a": "Auf Wiedersehen",
+                    "b": "Tschüss",
+                    "c": "Hallo",
+                    "d": "Bis später",
+                    "correct": "Auf Wiedersehen"
+                }
+            },
+            "question3": {
+                "word_in_english": ["Please"],
+                "options": {
+                    "a": "Ja",
+                    "b": "Bitte",
+                    "c": "Entschuldigung",
+                    "d": "Danke",
+                    "correct": "Bitte"
+                }
+            },
+            "question4": {
+                "word_in_english": ["Thank You"],
+                "options": {
+                    "a": "Danke",
+                    "b": "Gern geschehen",
+                    "c": "Hallo",
+                    "d": "Auf Wiedersehen",
+                    "correct": "Danke"
+                }
+            },
+            "question5": {
+                "word_in_english": ["Yes"],
+                "options": {
+                    "a": "Ja",
+                    "b": "Nein",
+                    "c": "Vielleicht",
+                    "d": "Tschüss",
+                    "correct": "Ja"
+                }
+            }
+        },
+        "level2": {
+            "difficulty": "Amateur",
+            "question1": {
+                "word_in_english": ["Excuse me"],
+                "options": {
+                    "a": "Entschuldigung",
+                    "b": "Hallo",
+                    "c": "Bitte",
+                    "d": "Danke",
+                    "correct": "Entschuldigung"
+                }
+            },
+            "question2": {
+                "word_in_english": ["Neighbor"],
+                "options": {
+                    "a": "Nachbar",
+                    "b": "Freund",
+                    "c": "Kollege",
+                    "d": "Familie",
+                    "correct": "Nachbar"
+                }
+            },
+            "question3": {
+                "word_in_english": ["Dream"],
+                "options": {
+                    "a": "Traum",
+                    "b": "Alptraum",
+                    "c": "Erinnerung",
+                    "d": "Idee",
+                    "correct": "Traum"
+                }
+            },
+            "question4": {
+                "word_in_english": ["Strength"],
+                "options": {
+                    "a": "Kraft",
+                    "b": "Schwäche",
+                    "c": "Mut",
+                    "d": "Macht",
+                    "correct": "Kraft"
+                }
+            },
+            "question5": {
+                "word_in_english": ["Journey"],
+                "options": {
+                    "a": "Reise",
+                    "b": "Wanderung",
+                    "c": "Ausflug",
+                    "d": "Fahrt",
+                    "correct": "Reise"
+                }
+            }
+        },
+        "level3": {
+            "difficulty": "Intermediate",
+            "question1": {
+                "word_in_english": ["Philosophy"],
+                "options": {
+                    "a": "Philosophie",
+                    "b": "Wissenschaft",
+                    "c": "Logik",
+                    "d": "Theorie",
+                    "correct": "Philosophie"
+                }
+            },
+            "question2": {
+                "word_in_english": ["Technology"],
+                "options": {
+                    "a": "Technologie",
+                    "b": "Innovation",
+                    "c": "Erfindung",
+                    "d": "Maschinen",
+                    "correct": "Technologie"
+                }
+            },
+            "question3": {
+                "word_in_english": ["Environmental"],
+                "options": {
+                    "a": "Ökologisch",
+                    "b": "Natürlich",
+                    "c": "Umwelt",
+                    "d": "Nachhaltig",
+                    "correct": "Umwelt"
+                }
+            },
+            "question4": {
+                "word_in_english": ["Intellectual"],
+                "options": {
+                    "a": "Intellektuell",
+                    "b": "Logisch",
+                    "c": "Gelehrt",
+                    "d": "Wissenschaftlich",
+                    "correct": "Intellektuell"
+                }
+            },
+            "question5": {
+                "word_in_english": ["Existential"],
+                "options": {
+                    "a": "Existierend",
+                    "b": "Existent",
+                    "c": "Existentiell",
+                    "d": "Konkret",
+                    "correct": "Existentiell"
+                }
+            }
+        },
+        "level4": {
+            "difficulty": "Advanced",
+            "question1": {
+                "word_in_english": ["Consciousness"],
+                "options": {
+                    "a": "Bewusstsein",
+                    "b": "Kognition",
+                    "c": "Geist",
+                    "d": "Intelligenz",
+                    "correct": "Bewusstsein"
+                }
+            },
+            "question2": {
+                "word_in_english": ["Metaphysical"],
+                "options": {
+                    "a": "Metaphysisch",
+                    "b": "Philosophisch",
+                    "c": "Übernatürlich",
+                    "d": "Abstrakt",
+                    "correct": "Metaphysisch"
+                }
+            },
+            "question3": {
+                "word_in_english": ["Paradox"],
+                "options": {
+                    "a": "Paradoxon",
+                    "b": "Widerspruch",
+                    "c": "Dilemma",
+                    "d": "Konflikt",
+                    "correct": "Paradoxon"
+                }
+            },
+            "question4": {
+                "word_in_english": ["Abstract"],
+                "options": {
+                    "a": "Abstrakt",
+                    "b": "Konkret",
+                    "c": "Real",
+                    "d": "Klar",
+                    "correct": "Abstrakt"
+                }
+            },
+            "question5": {
+                "word_in_english": ["Ineffable"],
+                "options": {
+                    "a": "Unaussprechlich",
+                    "b": "Ineffable",
+                    "c": "Unbeschreiblich",
+                    "d": "Unverständlich",
+                    "correct": "Unaussprechlich"
+                }
+            }
+        },
+        "level5": {
+            "difficulty": "Expert",
+            "question1": {
+                "word_in_english": ["Achievement"],
+                "options": {
+                    "a": "Erfolg",
+                    "b": "Misserfolg",
+                    "c": "Ziel",
+                    "d": "Fortschritt",
+                    "correct": "Erfolg"
+                }
+            },
+            "question2": {
+                "word_in_english": ["Effort"],
+                "options": {
+                    "a": "Arbeit",
+                    "b": "Anstrengung",
+                    "c": "Kraft",
+                    "d": "Energie",
+                    "correct": "Anstrengung"
+                }
+            },
+            "question3": {
+                "word_in_english": ["Opportunity"],
+                "options": {
+                    "a": "Gelegenheit",
+                    "b": "Chance",
+                    "c": "Möglichkeit",
+                    "d": "Wahl",
+                    "correct": "Gelegenheit"
+                }
+            },
+            "question4": {
+                "word_in_english": ["Concern"],
+                "options": {
+                    "a": "Sorge",
+                    "b": "Problem",
+                    "c": "Frage",
+                    "d": "Bedenken",
+                    "correct": "Sorge"
+                }
+            },
+            "question5": {
+                "word_in_english": ["Challenge"],
+                "options": {
+                    "a": "Herausforderung",
+                    "b": "Problem",
+                    "c": "Schwierigkeit",
+                    "d": "Hindernis",
+                    "correct": "Herausforderung"
+                }
+            }
+        }
+    },
+    "es": {
+        "level1": {
+            "difficulty": "Beginner",
+            "question1": {
+                "word_in_english": ["Hello"],
+                "options": {
+                    "a": "Hola",
+                    "b": "Buenos días",
+                    "c": "Adiós",
+                    "d": "Gracias",
+                    "correct": "Hola"
+                }
+            },
+            "question2": {
+                "word_in_english": ["Goodbye"],
+                "options": {
+                    "a": "Adiós",
+                    "b": "Hasta luego",
+                    "c": "Hola",
+                    "d": "Hasta pronto",
+                    "correct": "Adiós"
+                }
+            },
+            "question3": {
+                "word_in_english": ["Please"],
+                "options": {
+                    "a": "Sí",
+                    "b": "Por favor",
+                    "c": "Perdón",
+                    "d": "Gracias",
+                    "correct": "Por favor"
+                }
+            },
+            "question4": {
+                "word_in_english": ["Thank You"],
+                "options": {
+                    "a": "Gracias",
+                    "b": "De nada",
+                    "c": "Hola",
+                    "d": "Adiós",
+                    "correct": "Gracias"
+                }
+            },
+            "question5": {
+                "word_in_english": ["Yes"],
+                "options": {
+                    "a": "Sí",
+                    "b": "No",
+                    "c": "Tal vez",
+                    "d": "Adiós",
+                    "correct": "Sí"
+                }
+            }
+        },
+        "level2": {
+            "difficulty": "Amateur",
+            "question1": {
+                "word_in_english": ["Excuse me"],
+                "options": {
+                    "a": "Perdón",
+                    "b": "Gracias",
+                    "c": "Por favor",
+                    "d": "Hola",
+                    "correct": "Perdón"
+                }
+            },
+            "question2": {
+                "word_in_english": ["Neighbor"],
+                "options": {
+                    "a": "Vecino",
+                    "b": "Amigo",
+                    "c": "Colega",
+                    "d": "Familia",
+                    "correct": "Vecino"
+                }
+            },
+            "question3": {
+                "word_in_english": ["Dream"],
+                "options": {
+                    "a": "Sueño",
+                    "b": "Pesadilla",
+                    "c": "Recuerdo",
+                    "d": "Idea",
+                    "correct": "Sueño"
+                }
+            },
+            "question4": {
+                "word_in_english": ["Strength"],
+                "options": {
+                    "a": "Fuerza",
+                    "b": "Debilidad",
+                    "c": "Valor",
+                    "d": "Poder",
+                    "correct": "Fuerza"
+                }
+            },
+            "question5": {
+                "word_in_english": ["Journey"],
+                "options": {
+                    "a": "Viaje",
+                    "b": "Caminata",
+                    "c": "Excursión",
+                    "d": "Ruta",
+                    "correct": "Viaje"
+                }
+            }
+        },
+        "level3": {
+            "difficulty": "Intermediate",
+            "question1": {
+                "word_in_english": ["Philosophy"],
+                "options": {
+                    "a": "Filosofía",
+                    "b": "Ciencia",
+                    "c": "Lógica",
+                    "d": "Teoría",
+                    "correct": "Filosofía"
+                }
+            },
+            "question2": {
+                "word_in_english": ["Technology"],
+                "options": {
+                    "a": "Tecnología",
+                    "b": "Innovación",
+                    "c": "Invención",
+                    "d": "Máquinas",
+                    "correct": "Tecnología"
+                }
+            },
+            "question3": {
+                "word_in_english": ["Environmental"],
+                "options": {
+                    "a": "Ecológico",
+                    "b": "Natural",
+                    "c": "Ambiental",
+                    "d": "Sostenible",
+                    "correct": "Ambiental"
+                }
+            },
+            "question4": {
+                "word_in_english": ["Intellectual"],
+                "options": {
+                    "a": "Intelectual",
+                    "b": "Lógico",
+                    "c": "Erudito",
+                    "d": "Científico",
+                    "correct": "Intelectual"
+                }
+            },
+            "question5": {
+                "word_in_english": ["Existential"],
+                "options": {
+                    "a": "Existente",
+                    "b": "Existencial",
+                    "c": "Real",
+                    "d": "Concreto",
+                    "correct": "Existencial"
+                }
+            }
+        },
+        "level4": {
+            "difficulty": "Advanced",
+            "question1": {
+                "word_in_english": ["Consciousness"],
+                "options": {
+                    "a": "Conciencia",
+                    "b": "Cognición",
+                    "c": "Mente",
+                    "d": "Inteligencia",
+                    "correct": "Conciencia"
+                }
+            },
+            "question2": {
+                "word_in_english": ["Metaphysical"],
+                "options": {
+                    "a": "Metafísico",
+                    "b": "Filosófico",
+                    "c": "Sobrenatural",
+                    "d": "Abstracto",
+                    "correct": "Metafísico"
+                }
+            },
+            "question3": {
+                "word_in_english": ["Paradox"],
+                "options": {
+                    "a": "Paradoja",
+                    "b": "Contradicción",
+                    "c": "Dilema",
+                    "d": "Conflicto",
+                    "correct": "Paradoja"
+                }
+            },
+            "question4": {
+                "word_in_english": ["Abstract"],
+                "options": {
+                    "a": "Abstracto",
+                    "b": "Concreto",
+                    "c": "Real",
+                    "d": "Claro",
+                    "correct": "Abstracto"
+                }
+            },
+            "question5": {
+                "word_in_english": ["Ineffable"],
+                "options": {
+                    "a": "Inefable",
+                    "b": "Inefable",
+                    "c": "Indescriptible",
+                    "d": "Incomprensible",
+                    "correct": "Inefable"
+                }
+            }
+        },
+        "level5": {
+            "difficulty": "Expert",
+            "question1": {
+                "word_in_english": ["Achievement"],
+                "options": {
+                    "a": "Logro",
+                    "b": "Fracaso",
+                    "c": "Objetivo",
+                    "d": "Progreso",
+                    "correct": "Logro"
+                }
+            },
+            "question2": {
+                "word_in_english": ["Effort"],
+                "options": {
+                    "a": "Trabajo",
+                    "b": "Esfuerzo",
+                    "c": "Fuerza",
+                    "d": "Energía",
+                    "correct": "Esfuerzo"
+                }
+            },
+            "question3": {
+                "word_in_english": ["Opportunity"],
+                "options": {
+                    "a": "Oportunidad",
+                    "b": "Suerte",
+                    "c": "Posibilidad",
+                    "d": "Elección",
+                    "correct": "Oportunidad"
+                }
+            },
+            "question4": {
+                "word_in_english": ["Concern"],
+                "options": {
+                    "a": "Preocupación",
+                    "b": "Problema",
+                    "c": "Cuestión",
+                    "d": "Interés",
+                    "correct": "Preocupación"
+                }
+            },
+            "question5": {
+                "word_in_english": ["Challenge"],
+                "options": {
+                    "a": "Desafío",
+                    "b": "Problema",
+                    "c": "Dificultad",
+                    "d": "Obstáculo",
+                    "correct": "Desafío"
                 }
             }
         }

@@ -14,10 +14,13 @@ const PractialQuestion = () => {
 
     useEffect(()=>{
         Practical().then(answer=>{
-            UserDataForQuiz().then(ans=>{
-                let personalized_questions = determine_questions(answer,ans);
-                setPersonalizedQuiz(personalized_questions);
-            })
+            if(answer.length > 5){
+                UserDataForQuiz().then(ans=>{
+                    ans = ans ? ans : [];
+                    let personalized_questions = determine_questions(answer,ans);
+                    setPersonalizedQuiz(personalized_questions);
+                })
+            }
         })
     },[]);
 

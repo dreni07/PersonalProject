@@ -4,13 +4,19 @@ import { CheckForAccount } from './Check';
 import { first_letter_capitalized } from './Level';
 import { SaveCourse } from './SaveCourse';
 import { useNavigation } from '@react-navigation/native';
-// import { QuestionWrong } from './AddQuestionWrong';
+import { QuestionWrong } from './AddQuestionWrong';
 // import { Practical } from './Practical';
 
 const Question = ({route,navigation}) => {
     // let the_question = question.at(-1);
     const [userLanguage,setUserLanguage] = useState('');
     const main_navigation = useNavigation();
+
+    let language_map = {
+        de:'German',
+        fr:'French',
+        es:'Spanish'
+    }
 
 
     const colors = [
@@ -19,6 +25,7 @@ const Question = ({route,navigation}) => {
         '#2196F3', // Blue (Bright Blue)
         '#4CAF50'  // Green (Green)
       ];
+
     const account = CheckForAccount();
     account.then(ans=>{
         let the_user = JSON.parse(ans);
@@ -33,6 +40,8 @@ const Question = ({route,navigation}) => {
         let the_correct_answer = question[1].options.correct;
         return the_correct_answer;
     },[]);
+
+    
 
 
     const handlePress = (answer) => {
@@ -66,7 +75,7 @@ const Question = ({route,navigation}) => {
             <View style={styles.question_wrapper}>
                 <View style={styles.question_container}>
                     <View style={styles.question}>
-                        <Text style={styles.question_text}>How To Say {question[1].word_in_english[0]} In {userLanguage ? first_letter_capitalized(userLanguage) : ''}?</Text>
+                        <Text style={styles.question_text}>How To Say {question[1].word_in_english[0]} In {userLanguage ? first_letter_capitalized(language_map[userLanguage]) : ''}?</Text>
                     </View>
                     <View style={styles.options}>
                         <Text style={{ color:'#333',fontFamily:'sans-serif',fontWeight:'500',fontSize:'20px' }}>Options</Text>

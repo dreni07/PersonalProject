@@ -1,5 +1,6 @@
 import {useState,useEffect} from 'react';
 import {View,Text,StyleSheet,Modal,TouchableOpacity} from 'react-native';
+import { CheckForAccount } from './Check';
 
 const colors = [
     '#9B59B6', // Purple
@@ -19,6 +20,24 @@ const SearchDetails = ({route}) => {
     const [synonyms,setSynonyms] = useState([]);
     const [examples,setExamples] = useState([]);
     const [current_searching,setCurrentSearching] = useState('');
+    const [search_language,setSearchingLanguage] = useState("");
+    
+
+     
+    const get_the_language = async () => {
+        try {
+            const account = await CheckForAccount();
+            return account ? account : {};
+        } catch(err) {
+            console.error(err);
+        }
+    }
+    
+    useEffect(()=>{
+        get_the_language().then(ans=>{
+            setSearchingLanguage(JSON.parse(ans).language);
+        })
+    },[]);
 
     useEffect(()=>{
         let random_index = Math.floor(Math.random() * colors.length);
@@ -61,9 +80,9 @@ const SearchDetails = ({route}) => {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-                text:text.nativeEvent.text,
+                text:text,
                 source: 'en',
-                target: 'fr'
+                target: search_language
             })
         };
         
@@ -78,6 +97,7 @@ const SearchDetails = ({route}) => {
         setCurrentSearching('synonyms');
         setModalVisible(true);
         let the_synonyms = search_details.synonyms;
+        console.log(the_synonyms,"HANDLE SYNONYMS");
         the_synonyms.forEach((synonym,index)=>{
             if(index < 5){
                 let the_synonym_translated = {};
@@ -168,19 +188,23 @@ const SearchDetails = ({route}) => {
                         <View style={styles.insideModalView}>
                             <View style={styles.modalWrapper}>
                                 { current_searching == "synonyms" ? (synonyms.map((synonym,index)=>{
-                                    return (
-                                        <View style={styles.unique_synonym} key={index}>
-                                            <Text style={[styles.child_text,{whiteSpace:'wrap'}]}>{Object.keys(synonym).at(0)}</Text>
-                                            <Text style={[styles.child_text,{whiteSpace:'wrap'}]}>{Object.values(synonym).at(0)}</Text>
-                                        </View>
-                                    )
+                                    if(index < 5) {
+                                        return (
+                                            <View style={styles.unique_synonym} key={index}>
+                                                <Text style={[styles.child_text,{whiteSpace:'wrap'}]}>{Object.keys(synonym).at(0)}</Text>
+                                                <Text style={[styles.child_text,{whiteSpace:'wrap'}]}>{Object.values(synonym).at(0)}</Text>
+                                            </View>
+                                        )
+                                    }
                                 })): (examples.map((example,index)=>{
-                                    return (
-                                        <View style={styles.unique_synonym} key={index}>
-                                            <Text style={[styles.child_text,{whiteSpace:'wrap'}]}>{remove_un_wanted_chars(Object.keys(example).at(0))}</Text>
-                                            <Text style={[styles.child_text,{whiteSpace:'wrap'}]}>{remove_un_wanted_chars(Object.values(example).at(0))}</Text>
-                                        </View>
-                                    )
+                                    if(index < 5) {
+                                        return (
+                                            <View style={styles.unique_synonym} key={index}>
+                                                <Text style={[styles.child_text,{whiteSpace:'wrap'}]}>{remove_un_wanted_chars(Object.keys(example).at(0))}</Text>
+                                                <Text style={[styles.child_text,{whiteSpace:'wrap'}]}>{remove_un_wanted_chars(Object.values(example).at(0))}</Text>
+                                            </View>
+                                        )
+                                    }
                                 }))}
                             </View> 
                         </View>
@@ -292,7 +316,61 @@ const styles = StyleSheet.create({
         display:'flex',
         flexDirection:'row',
         justifyContent:'space-evenly',
+    },
+    modalView: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: 'rgba(0, 0, 0, 0.5)', // Background overlay for modal
+    },
+    insideModalView: {
+        backgroundColor: '#FFFFFF', // White background for the modal container
+        padding: 20,
+        borderRadius: 10,
+        width: '80%',
+        maxHeight: '80%',
+        overflow: 'scroll',
+    },
+    modalWrapper: {
+        flex: 1,
+    },
+    unique_synonym: {
+        backgroundColor: '#F8F8F8', // Light gray background for each synonym/example card
+        padding: 15,
+        marginBottom: 15,
+        borderRadius: 8,
+        shadowColor: '#000',
+        shadowOpacity: 0.1,
+        shadowRadius: 5,
+        elevation: 3, // Adds shadow to the card
+    },
+    child_text: {
+        fontSize: 16,
+        color: '#333333',
+        marginBottom: 8,
+        lineHeight: 22,
+    },
+    synonymText: {
+        fontWeight: 'bold', // Make synonym/word bold
+        color: '#007BFF', // Blue color for the synonym/word
+    },
+    translationText: {
+        fontStyle: 'italic', // Italicize the translation
+        color: '#6c757d', // Slightly lighter color for the translation text
+    },
+    noResultsText: {
+        fontSize: 18,
+        color: '#FF6347', // Red color for no results
+        textAlign: 'center',
+        marginTop: 20,
+    },
+    headerText: {
+        fontSize: 20,
+        fontWeight: 'bold',
+        color: '#444444',
+        marginBottom: 20,
+        textAlign: 'center',
     }
-})
+});
 
 export default SearchDetails;

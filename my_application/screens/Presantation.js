@@ -28,9 +28,7 @@ const Presantation = ({navigation}) => {
 
             const the_account = CreateAccount(user_data);
             the_account.then(ans=>{
-                if(ans){
-                    navigation.navigate("Home");
-                }
+                navigation.navigate("Home");
             })
         }
     }
@@ -61,10 +59,9 @@ const Presantation = ({navigation}) => {
                         <View>
                             <Picker style={styles.picker} selectedValue={language_to_learn} onValueChange={(language) => {console.log(language);setLanguage(language)}}>
                                 <Picker.Item label="Select Option" value="" enabled={false}/>
-                                <Picker.Item style={styles.picker_item} label="French" value="french"/>
-                                <Picker.Item style={styles.picker_item} label="German" value="german"/>
-                                <Picker.Item style={styles.picker_item} label="Spanish" value="spanish"/>
-                                <Picker.Item style={styles.picker_item} label="Albanian" value="albanian"/>
+                                <Picker.Item style={styles.picker_item} label="French" value="fr"/>
+                                <Picker.Item style={styles.picker_item} label="German" value="de"/>
+                                <Picker.Item style={styles.picker_item} label="Spanish" value="es"/>
                             </Picker>
                         </View>
                     </View>

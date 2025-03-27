@@ -3,7 +3,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 export const QuestionWrong = async (question) => { // this question will look something like
     
     try{
-        const the_questions_wrong = await AsyncStorage.getItem('questions_wrong');
+        let the_questions_wrong = await AsyncStorage.getItem('questions_wrong');
         if(!the_questions_wrong){
             const question_wrong = [question];
             await AsyncStorage.setItem('questions_wrong',JSON.stringify(question_wrong));
